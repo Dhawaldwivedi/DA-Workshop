@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Analysis using AI</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+margin:0;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background:white;
+color:#2f8d46;
+overflow:hidden;
+}
+
+.slide{
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+padding:40px;
+animation:fade 0.8s ease;
+}
+
+.active{display:flex}
+
+h1{font-size:54px;margin-bottom:20px}
+h2{font-size:40px;margin-bottom:20px}
+p{font-size:22px;max-width:850px;color:#1e5c2d}
+
+.logo{
+width:240px;
+margin-bottom:30px;
+animation:float 4s ease-in-out infinite;
+}
+
+.ai-icon{
+font-size:80px;
+animation:pulse 2s infinite;
+margin-bottom:20px;
+}
+
+canvas{
+max-width:600px;
+margin-top:30px;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(40px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+100%{transform:translateY(0)}
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.1)}
+100%{transform:scale(1)}
+}
+
+.nav{
+position:fixed;
+bottom:25px;
+right:30px;
+}
+
+button{
+padding:12px 20px;
+background:#2f8d46;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+margin-left:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1e5c2d;
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:6px;
+background:#2f8d46;
+width:0%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- Slide 1 -->
+<div class="slide active">
+<img src="GeeksForGeeks_logo.png" class="logo">
+<h1>Data Analysis using AI</h1>
+<p>How Artificial Intelligence is transforming modern Data Analytics</p>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+<div class="ai-icon">📊</div>
+<h2>What is Data Analysis?</h2>
+<p>Data Analysis is the process of inspecting, cleaning and transforming raw data to discover useful insights and support better decision making.</p>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+<div class="ai-icon">📁</div>
+<h2>Types of Data</h2>
+<p>Structured Data • Semi-Structured Data • Unstructured Data</p>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+<div class="ai-icon">⚙️</div>
+<h2>Traditional Data Analysis</h2>
+<p>Collect → Clean → Explore → Analyze → Visualize → Report</p>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+<div class="ai-icon">⏳</div>
+<h2>Limitations of Traditional Analysis</h2>
+<p>Manual effort, slower insights, difficulty handling massive datasets</p>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide">
+<div class="ai-icon">🤖</div>
+<h2>Rise of AI in Data Analytics</h2>
+<p>AI can automatically detect patterns, generate insights and accelerate analysis</p>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide">
+<h2>AI Powered Sales Insights</h2>
+<canvas id="chart1"></canvas>
+</div>
+
+<!-- Slide 8 -->
+<div class="slide">
+<h2>AI Detecting Trends</h2>
+<canvas id="chart2"></canvas>
+</div>
+
+<!-- Slide 9 -->
+<div class="slide">
+<div class="ai-icon">🧠</div>
+<h2>AI Tools for Data Analysts</h2>
+<p>Automated EDA • Predictive Models • Generative AI • Smart Dashboards</p>
+</div>
+
+<!-- Slide 10 -->
+<div class="slide">
+<img src="GeeksForGeeks_logo.png" class="logo">
+<h2>The Future of Analytics</h2>
+<p>AI will assist analysts in generating insights faster and focusing on strategic decision making.</p>
+</div>
+
+<div class="nav">
+<button onclick="prevSlide()">Previous</button>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<script>
+
+let slides=document.querySelectorAll('.slide');
+let index=0;
+let progress=document.getElementById('progress');
+
+function showSlide(i){
+slides.forEach(s=>s.classList.remove('active'));
+slides[i].classList.add('active');
+progress.style.width=((i+1)/slides.length)*100+'%';
+}
+
+function nextSlide(){
+if(index<slides.length-1){index++;showSlide(index);} }
+
+function prevSlide(){
+if(index>0){index--;showSlide(index);} }
+
+window.addEventListener('keydown',e=>{
+if(e.key==='ArrowRight')nextSlide();
+if(e.key==='ArrowLeft')prevSlide();
+});
+
+// Chart 1
+new Chart(document.getElementById('chart1'),{
+type:'bar',
+data:{
+labels:['Electronics','Fashion','Books','Sports','Beauty'],
+datasets:[{
+label:'Sales',
+data:[12,19,9,15,10]
+}]
+},
+options:{
+animation:{duration:2000}
+}
+});
+
+// Chart 2
+new Chart(document.getElementById('chart2'),{
+type:'line',
+data:{
+labels:['Jan','Feb','Mar','Apr','May','Jun'],
+datasets:[{
+label:'Revenue Trend',
+data:[10,14,12,18,20,25],
+fill:false
+}]
+},
+options:{
+animation:{duration:2000}
+}
+});
+
+</script>
+
+</body>
+</html>
